@@ -1,0 +1,2 @@
+all:
+	gcc -Iinclude/ src/callbacks.c src/draw.c src/camera.c src/utils.c src/main.c src/ball.c src/game.c src/init.c src/pad.c -lSOIL -lobj -lopengl32 -lglu32 -lglut32 -lm -o t.exe -Wall -Wextra -Wpedantic
