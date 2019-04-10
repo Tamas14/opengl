@@ -16,7 +16,7 @@ void init_opengl()
         "5.png"
     };
 	
-	load_model(&padmodel, "Cube.obj");
+	load_model(&padmodel, "untitled.obj");
 	int i;
 	for(i = 1; i <=5; i++)
 	{

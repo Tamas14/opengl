@@ -114,7 +114,7 @@ void draw_game(Game* game)
 		glTranslatef(x1, y1, 0);
 		glColor3f(1-temp, 1-temp, 1-temp);
 		//printf("%f, %f \n", x1, y1);
-		glScalef(20, 20, 5);
+		glScalef(s, s, 50);
 		draw_model(&padmodel);
 	
 		glPopMatrix();
