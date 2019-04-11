@@ -76,7 +76,7 @@ GLuint load_texture(char* filename)
 
 void draw_game(Game* game)
 {
-	camera.position.y = game->pads[1].x;
+	camera.position.x = game->pads[1].x;
 	camera.position.y = game->pads[1].y;
 	//camera.position.z = 0.1;
 	

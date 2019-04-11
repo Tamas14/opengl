@@ -21,8 +21,8 @@ vn -1 0 0
 # 6 normals
 
 vt 0 0 0
-vt 1 0 0
 vt 0 1 0
+vt 1 0 0
 vt 1 1 0
 # 4 texture coordinates
 

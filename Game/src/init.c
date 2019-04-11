@@ -26,7 +26,7 @@ void init_opengl()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    //glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
 
     glClearDepth(1.0);
 
