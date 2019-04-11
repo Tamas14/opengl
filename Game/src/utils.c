@@ -1,9 +1,10 @@
 #include "utils.h"
 
 #include <math.h>
+double MPI = 3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067;
 
 double degree_to_radian(double degree)
 {
-	return degree * M_PI / 180.0;
+	return degree * MPI / 180.0;
 }
 

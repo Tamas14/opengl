@@ -14,7 +14,7 @@ void display()
     glPushMatrix();
 
 	set_view(&camera);
-	printf("%f, %f, %f, %f, %f, %f \n", camera.position.x, camera.position.y, camera.position.z, camera.rotation.x, camera.rotation.y, camera.rotation.z);
+	//printf("%f, %f, %f, %f, %f, %f \n", camera.position.x, camera.position.y, camera.position.z, camera.rotation.x, camera.rotation.y, camera.rotation.z);
     draw_game(&game);
 
     glPopMatrix();
