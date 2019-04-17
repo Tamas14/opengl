@@ -11,13 +11,13 @@ void resize_game(Game* game, int width, int height)
 void init(Game* game, int width, int height)
 {
 	game->dir = 0;
-	game->rotation =                                           0;
+	game->rotation = 0;
     game->width = width;
     game->height = height;
 	game->numberOfPads = sizeof(game->pads)/sizeof(game->pads[0]);
 	int i;
 	
-	game->pads[0].size = 20;
+	game->pads[0].size = 50;
 	//game->pads[0].x = width/2-game->pads[0].size/2;
 	game->pads[0].x = 0;
 	//game->pads[0].y = height/2-game->pads[0].size/2;
@@ -57,18 +57,25 @@ void generate(Game* game, int i)
 	
 	if(game->dir == 0)
 		ymove = -1;
+	else
+		ymove = 0;
 	
-	game->rotation = game->rotation + 90*game->dir*-1;
+	game->rotation = game->rotation + 90*game->dir*(-1);
 
 	double angle = degree_to_radian(game->rotation);
 	
+	
 	double a[2][2] = { {cos(angle), -sin(angle)},
 					  {sin(angle),  cos(angle)} };
+					  
+	printf("%f %f %f %f \n", a[0][0], a[0][1], a[1][0], a[1][0]);
 					  
 	double b[2][1] = {{game->dir}, {ymove}};
 	double c[2][1];
 	
 	mult(2, 2, 2, 1, a, b, c);
+	
+	printf("%f %f\n", c[0][0], c[1][0]);
 	
 	newx = tpads[i-1].size*c[0][0] + tpads[i-1].x;
 	newy = tpads[i-1].size*c[1][0] + tpads[i-1].y;

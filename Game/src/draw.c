@@ -22,7 +22,7 @@ void set_lightning()
 
 void set_material(const Material* material)
 {
-    float ambient_material_color[] = {
+    /*float ambient_material_color[] = {
         material->ambient.red,
         material->ambient.green,
         material->ambient.blue
@@ -44,7 +44,7 @@ void set_material(const Material* material)
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse_material_color);
     glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular_material_color);
 
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &(material->shininess));
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &(material->shininess));*/
 }
 
 GLuint load_texture(char* filename)
@@ -100,7 +100,6 @@ void draw_game(Game* game)
 	
 	for(i=0; i < game->numberOfPads; i++)
 	{
-		
 		glPushMatrix();
 		
 		float x1 = game->pads[i].x;

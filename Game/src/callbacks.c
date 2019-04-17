@@ -72,7 +72,7 @@ void keyboard(unsigned char key, int x, int y)
 			init(&game, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
 		break;*/
 		
-		case 'q':
+		/*case 'q':
 			rotate_camera(&camera, 5, 0, 0);
 		break;
 		case 'w':
@@ -89,7 +89,7 @@ void keyboard(unsigned char key, int x, int y)
 		break;
 		case 'x':
 			rotate_camera(&camera, 0, 0, -5);
-		break;
+		break;*/
 		
 		case 'r':
 			shift(&game);
