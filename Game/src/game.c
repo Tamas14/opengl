@@ -17,11 +17,15 @@ void init(Game* game, int width, int height)
 	game->numberOfPads = sizeof(game->pads)/sizeof(game->pads[0]);
 	int i;
 	
-	game->pads[0].size = 50;
-	//game->pads[0].x = width/2-game->pads[0].size/2;
+	game->ball.x = 0;
+	game->ball.y = 0;
+	game->ball.dir = -90;
+	
+	game->pads[0].size = 100;
 	game->pads[0].x = 0;
-	//game->pads[0].y = height/2-game->pads[0].size/2;
 	game->pads[0].y = 0;
+	game->pads[0].rotation = 0;
+	game->pads[0].dir = 1;
 	
 	for(i = 1; i < game->numberOfPads; i++)
 	{
@@ -60,23 +64,23 @@ void generate(Game* game, int i)
 	else
 		ymove = 0;
 	
-	game->rotation = game->rotation + 90*game->dir*(-1);
-
+	game->rotation = (game->rotation + 90*game->dir*(-1)) % 360;
+	
 	double angle = degree_to_radian(game->rotation);
 	
-	
-	double a[2][2] = { {cos(angle), -sin(angle)},
-					  {sin(angle),  cos(angle)} };
-					  
-	printf("%f %f %f %f \n", a[0][0], a[0][1], a[1][0], a[1][0]);
+	/*double a[2][2] = { {cos(angle), -sin(angle)},
+					  {sin(angle),  cos(angle)} }; */
+	double a[2][2]; 
+	a[0][0] = cos(angle);
+	a[0][1] = -sin(angle);
+	a[1][0] = sin(angle);
+	a[1][1] = cos(angle);
 					  
 	double b[2][1] = {{game->dir}, {ymove}};
 	double c[2][1];
 	
 	mult(2, 2, 2, 1, a, b, c);
-	
-	printf("%f %f\n", c[0][0], c[1][0]);
-	
+
 	newx = tpads[i-1].size*c[0][0] + tpads[i-1].x;
 	newy = tpads[i-1].size*c[1][0] + tpads[i-1].y;
 	
@@ -86,6 +90,19 @@ void generate(Game* game, int i)
 	tpads[i].x = newx;
 	tpads[i].y = newy;
 	tpads[i].size = tpads[i-1].size;
+	tpads[i].dir = game->dir+1;
+	
+	if(game->dir != 0)
+		if(game->dir == -1)
+			tpads[i].rotation = game->rotation;
+		else
+			tpads[i].rotation = game->rotation - 180;
+		
+	else
+		tpads[i].rotation = game->rotation;
+	int j;
+	printf("----- \n");
+	printf("%d, %d %d \n", i, game->dir, game->rotation);
 }
 
 void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], double b[rowsB][colsB], double c[rowsA][colsB])
@@ -107,7 +124,7 @@ void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], do
 
 void update_game(Game* game, double time)
 {
-    
+    update_ball(game, time);
 }
 
 

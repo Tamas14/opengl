@@ -2,8 +2,8 @@
 
 #include "GL/glut.h"
 #include <SOIL/SOIL.h>
-#include <GL/glut.h>
 #include "init.h"
+#include "utils.h"
 
 typedef GLubyte Pixel[3];
 
@@ -76,101 +76,39 @@ GLuint load_texture(char* filename)
 
 void draw_game(Game* game)
 {
-	camera.position.x = game->pads[1].x;
-	camera.position.y = game->pads[1].y;
-	//camera.position.z = 0.1;
+	camera.position.x = game->ball.x - sin(degree_to_radian(game->ball.dir+90))*50;
+	camera.position.y = game->ball.y + cos(degree_to_radian(game->ball.dir+90))*50;
+	camera.position.z = 50;
 	
-	glBegin(GL_LINES);
-
-    glColor3f(1, 0, 0);
-    glVertex3f(0, 0, 0);
-    glVertex3f(10, 0, 0);
-
-    glColor3f(0, 1, 0);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 10, 0);
-
-    glColor3f(0, 0, 1);
-    glVertex3f(0, 0, 0);
-    glVertex3f(0, 0, 10);
-
-    glEnd();
+	camera.rotation.x = 60.0;
+    camera.rotation.y = 0;
+    camera.rotation.z = 270.0 + game->ball.dir;
 	
 	int i,j;
 	
 	for(i=0; i < game->numberOfPads; i++)
 	{
 		glPushMatrix();
-		
-		float x1 = game->pads[i].x;
-		float y1 = game->pads[i].y;
-		float s = game->pads[i].size;
-		//float x2 = x1+game->pads[i].size;
-		//float y2 = y1+game->pads[i].size;
-		float temp = i*(1.0/game->numberOfPads);
-		
-		glBindTexture(GL_TEXTURE_2D, textures[i]);
-		glTranslatef(x1, y1, 0);
-		glColor3f(1-temp, 1-temp, 1-temp);
-		//printf("%f, %f \n", x1, y1);
-		glScalef(s, s, 50);
-		draw_model(&padmodel);
-	
-		glPopMatrix();
-		
-	}
-	
-	
-	/**for(i=0; i < game->numberOfPads; i++)
-	{
-		glPushMatrix();
-		glScalef(50, 50, 1);
-		float x1 = game->pads[i].x;
-		float y1 = game->pads[i].y;
-		//float x2 = x1+game->pads[i].size;
-		//float y2 = y1+game->pads[i].size;
-		//float temp = i*(1.0/game->numberOfPads);
-		//glBindTexture(GL_TEXTURE_2D, game->pads[i].texture_id);
-		glTranslatef(x1, y1, 0);
-		
-		printf("%f, %f \n", x1, y1);
-		
-		draw_model(&padmodel);
-	
-		glPopMatrix();
-	}*/
-}
-
-/**void draw_game(Game* game)
-{
-	int i;
-	for(i=0; i < game->numberOfPads; i++)
-	{
-		float x1 = game->pads[i].x;
-		float y1 = game->pads[i].y;
-		float x2 = x1+game->pads[i].size;
-		float y2 = y1+game->pads[i].size;
-		float temp = i*(1.0/game->numberOfPads);
-		
-		glBegin(GL_POLYGON);
+			float x1 = game->pads[i].x;
+			float y1 = game->pads[i].y;
+			float s = game->pads[i].size;
+			float temp = i*(1.0/game->numberOfPads);
+			
+			glBindTexture(GL_TEXTURE_2D, textures[game->pads[i].dir]);
+			
+			glTranslatef(x1, y1, 0);
+			glRotatef(game->pads[i].rotation, 0, 0, 1);
 			glColor3f(1-temp, 1-temp, 1-temp);
-			glVertex2f(x1, y1);
-			glVertex2f(x2, y1);
-			glVertex2f(x2, y2);
-			glVertex2f(x1, y2);
-		glEnd();
-		
-		glBegin(GL_LINE_LOOP);
-			glColor3d(.5, .5, .5);
-			glVertex2f(x1, y1);
-			glVertex2f(x2, y1);
-			glVertex2f(x2, y2);
-			glVertex2f(x1, y2);
-		glEnd();
+			glScalef(s, s, 50);
+			draw_model(&padmodel);
+		glPopMatrix();
 	}
-
-    glPushMatrix();
-
-    glPopMatrix();
-}*/
-
+	
+	glPushMatrix();
+		glBindTexture(GL_TEXTURE_2D, textures[3]);
+		glTranslatef(game->ball.x, game->ball.y, 0.5);
+		glScalef(25, 25, 25);
+		glRotatef(game->ball.dir+90, 0, 0, 1);
+		draw_model(&ballmodel);
+	glPopMatrix();
+}

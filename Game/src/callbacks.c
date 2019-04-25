@@ -4,7 +4,7 @@
 float i = 0;
 
 #define VIEWPORT_RATIO (16.0 / 9.0)
-#define VIEWPORT_ASPECT 70.0
+#define VIEWPORT_ASPECT 80.0
 
 void display()
 {
@@ -25,7 +25,6 @@ void reshape(GLsizei width, GLsizei height)
 {
     resize_game(&game, width, height);
 	
-
     int x, y, w, h;
     double ratio;
 
@@ -56,44 +55,24 @@ void keyboard(unsigned char key, int x, int y)
 	x = y;
 	
     switch (key) {
-		/*case 'w':
-			for(i = 1; i < game.numberOfPads; i++)
-			{
-				generate(&game, i);
-			}
-		break;
-		
-		case 's':
+		case 'r':
 			shift(&game);
 			generate(&game, game.numberOfPads-1);
-		break;
-		
-		case 'r':
-			init(&game, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
-		break;*/
-		
-		/*case 'q':
-			rotate_camera(&camera, 5, 0, 0);
 		break;
 		case 'w':
-			rotate_camera(&camera, -5, 0, 0);
+			game.ball.speed_x = 2;
 		break;
-		case 'a':
-			rotate_camera(&camera, 0, 5, 0);
-		break;
-		case 's':
-			rotate_camera(&camera, 0, -5, 0);
-		break;
-		case 'y':
-			rotate_camera(&camera, 0, 0, 5);
-		break;
-		case 'x':
-			rotate_camera(&camera, 0, 0, -5);
-		break;*/
 		
-		case 'r':
-			shift(&game);
-			generate(&game, game.numberOfPads-1);
+		case 's':
+			game.ball.speed_x = -2;
+		break;
+		
+		case 'a':
+			game.ball.turning = -1;
+		break;
+		
+		case 'd':
+			game.ball.turning = 1;
 		break;
     }
 
@@ -101,9 +80,18 @@ void keyboard(unsigned char key, int x, int y)
 }
 
 void keyboard_up(unsigned char key, int x, int y)
-{
-
-
+{ 	
+	switch (key) {
+		case 'w':
+		case 's':
+			game.ball.speed_x = 0;
+		break;
+		
+		case 'a':
+		case 'd':
+			game.ball.turning = 0;
+		break;
+	}
     glutPostRedisplay();
 }
 
@@ -118,7 +106,8 @@ void idle()
     last_frame_time = current_time;
 
 	update_camera(&camera, elapsed_time);
-    /**update_game(&game, elapsed_time);*/
+    update_game(&game, elapsed_time);
+	
     glutPostRedisplay();
 }
 

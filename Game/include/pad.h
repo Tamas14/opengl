@@ -8,12 +8,17 @@
 
 GLuint textures[5];
 Model padmodel;
+Model car;
 typedef struct Pad
 {
 	int size;
     float x;
     float y;
+	int rotation;
+	int dir;
 } Pad;
+
+int getTexture(int padIndex);
 
 /**
  * Move the pad to the given position.

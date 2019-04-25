@@ -2,6 +2,7 @@
 #include <obj/load.h>
 #include <obj/draw.h>
 #include "pad.h"
+#include "ball.h"
 #include "init.h"
 
 void init_opengl()
@@ -9,18 +10,18 @@ void init_opengl()
     glClearColor(1, 1, .5, 1);
 	
 	char texture_filenames[][32] = {
-        "1.png",
-        "2.png",
-        "3.png",
-        "4.png",
-        "5.png"
+        "turnleft.png",
+        "forward.png",
+        "turnright.png",
+        "arrow.png"
     };
 	
 	load_model(&padmodel, "untitled.obj");
+	load_model(&ballmodel, "sphere.obj");
 	int i;
-	for(i = 1; i <=5; i++)
+	for(i = 0; i < 4; i++)
 	{
-		textures[i-1] = load_texture(texture_filenames[i-1]);
+		textures[i] = load_texture(texture_filenames[i]);
 	}
 	
     glMatrixMode(GL_MODELVIEW);

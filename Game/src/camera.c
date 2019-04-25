@@ -8,7 +8,7 @@ void init_camera(Camera* camera)
 {
     camera->position.x = 0;
     camera->position.y = 0;
-    camera->position.z = 300;
+    camera->position.z = 150;
     camera->rotation.x = 0.0;
     camera->rotation.y = 0.0;
     camera->rotation.z = 90.0;
@@ -98,14 +98,14 @@ void show_texture_preview()
     glColor3f(1, 1, 1);
 
     glBegin(GL_QUADS);
-    glTexCoord2f(0, 0);
-    glVertex3f(-1, 1, -3);
-    glTexCoord2f(1, 0);
-    glVertex3f(1, 1, -3);
-    glTexCoord2f(1, 1);
-    glVertex3f(1, -1, -3);
-    glTexCoord2f(0, 1);
-    glVertex3f(-1, -1, -3);
+		glTexCoord2f(0, 0);
+		glVertex3f(-1, 1, -3);
+		glTexCoord2f(1, 0);
+		glVertex3f(1, 1, -3);
+		glTexCoord2f(1, 1);
+		glVertex3f(1, -1, -3);
+		glTexCoord2f(0, 1);
+		glVertex3f(-1, -1, -3);
     glEnd();
 
     glDisable(GL_COLOR_MATERIAL);

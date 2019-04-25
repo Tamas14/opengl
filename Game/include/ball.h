@@ -1,16 +1,19 @@
 #ifndef BALL_H
 #define BALL_H
-
+#include <GL/glut.h>
+#include <obj/model.h>
+#include <math.h>
 /**
  * Ball position and speed
  */
+Model ballmodel;
 typedef struct Ball
 {
     float x;
     float y;
-    float radius;
+    float dir;
     float speed_x;
-    float speed_y;
+    int turning;
 } Ball;
 
 /**
@@ -22,6 +25,7 @@ void move_ball(Ball* ball, float x, float y);
  * Start the ball from the given position.
  */
 void start_ball(Ball* ball, float x, float y);
+void draw_ball(Ball* ball);
 
 /**
  * Update the ball.

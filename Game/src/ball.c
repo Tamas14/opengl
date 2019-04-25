@@ -1,4 +1,5 @@
 #include "ball.h"
+#include "utils.h"
 
 void move_ball(Ball* ball, float x, float y)
 {
@@ -8,15 +9,19 @@ void move_ball(Ball* ball, float x, float y)
 
 void start_ball(Ball* ball, float x, float y)
 {
-    ball->radius = 50;
-    move_ball(ball, x, y);
-    ball->speed_x = 300;
-    ball->speed_y = 300;
+
+}
+
+void draw_ball(Ball* ball)
+{
 }
 
 void update_ball(Ball* ball, double time)
 {
-    ball->x += ball->speed_x * time;
-    ball->y += ball->speed_y * time;
+
+	ball->dir -= ball->turning*3;
+	
+    ball->x += ball->speed_x * cos(degree_to_radian(ball->dir));
+    ball->y += ball->speed_x * sin(degree_to_radian(ball->dir));
 }
 
