@@ -1,50 +1,26 @@
 #include "draw.h"
-
 #include "GL/glut.h"
 #include <SOIL/SOIL.h>
+#include <stdio.h>
 #include "init.h"
 #include "utils.h"
+#include <obj/draw.h>
 
 typedef GLubyte Pixel[3];
 
 void set_lightning()
 {
-	float ambient_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    float diffuse_light[] = { 1.0f, 1.0f, 1.0, 1.0f };
-    float specular_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    float position[] = { 0.0f, 0.0f, 2.0f, 1.0f };
+	float ambient_light[] = { 	0.988f, 0.831f, 0.250f, 0.3f };
+    float diffuse_light[] = { 	1.0f, 1.0f, 1.0f, 0.5f };
+    float specular_light[] = { 	1.0f, 1.0f, 1.0f, 0.8f };
+    float position[] = { 0.0f, 0.0f, 10.0f, 1.0f };
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
+    glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 160.0f);
+    glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0.0f);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
-}
-
-void set_material(const Material* material)
-{
-    /*float ambient_material_color[] = {
-        material->ambient.red,
-        material->ambient.green,
-        material->ambient.blue
-    };
-
-    float diffuse_material_color[] = {
-        material->diffuse.red,
-        material->diffuse.green,
-        material->diffuse.blue
-    };
-
-    float specular_material_color[] = {
-        material->specular.red,
-        material->specular.green,
-        material->specular.blue
-    };
-
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT, ambient_material_color);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, diffuse_material_color);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, specular_material_color);
-
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, &(material->shininess));*/
 }
 
 GLuint load_texture(char* filename)
@@ -74,17 +50,21 @@ GLuint load_texture(char* filename)
     return texture_name;
 }
 
+char segedSting[200];
 void draw_game(Game* game)
-{
-	camera.position.x = game->ball.x - sin(degree_to_radian(game->ball.dir+90))*50;
-	camera.position.y = game->ball.y + cos(degree_to_radian(game->ball.dir+90))*50;
+{	
+	sprintf(segedSting, "Speed: %f", game->ball.speed_x);
+	
+	szovegKirajzolas(game, 0, 800, segedSting);
+	camera.position.x = game->ball.x - sin(degree_to_radian(game->ball.dir+90))*60;
+	camera.position.y = game->ball.y + cos(degree_to_radian(game->ball.dir+90))*60;
 	camera.position.z = 50;
 	
 	camera.rotation.x = 60.0;
     camera.rotation.y = 0;
     camera.rotation.z = 270.0 + game->ball.dir;
 	
-	int i,j;
+	int i;
 	
 	for(i=0; i < game->numberOfPads; i++)
 	{
@@ -107,8 +87,9 @@ void draw_game(Game* game)
 	glPushMatrix();
 		glBindTexture(GL_TEXTURE_2D, textures[3]);
 		glTranslatef(game->ball.x, game->ball.y, 0.5);
-		glScalef(25, 25, 25);
 		glRotatef(game->ball.dir+90, 0, 0, 1);
+		glScalef(25, 60, 25);
 		draw_model(&ballmodel);
+		set_lightning();
 	glPopMatrix();
 }

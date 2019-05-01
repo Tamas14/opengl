@@ -7,5 +7,6 @@
  * Draw the game.
  */
 void draw_game(Game* game);
-
+GLuint load_texture(char* filename);
+void set_lightning();
 #endif /* DRAW_H */

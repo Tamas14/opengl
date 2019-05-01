@@ -1,27 +1,28 @@
 #include "ball.h"
 #include "utils.h"
 
-void move_ball(Ball* ball, float x, float y)
+
+void update_ball(Ball* ball)
 {
-    ball->x = x;
-    ball->y = y;
-}
-
-void start_ball(Ball* ball, float x, float y)
-{
-
-}
-
-void draw_ball(Ball* ball)
-{
-}
-
-void update_ball(Ball* ball, double time)
-{
-
 	ball->dir -= ball->turning*3;
 	
-    ball->x += ball->speed_x * cos(degree_to_radian(ball->dir));
-    ball->y += ball->speed_x * sin(degree_to_radian(ball->dir));
+	if(ball->acceleration == 0)
+		ball->vel_x -= 0.01;
+	else
+		ball->vel_x += 0.07;
+	
+	if(ball->speed_x <= 0 && !ball->acceleration)
+	{
+		ball->speed_x = 0;
+		ball->vel_x = 0;
+	}
+	
+	if(ball->speed_x > 50 && ball->acceleration)
+		ball->vel_x = 0;
+	
+	ball->speed_x += ball->vel_x;
+	
+    ball->x += ball->speed_x/10 * cos(degree_to_radian(ball->dir));
+    ball->y += ball->speed_x/10 * sin(degree_to_radian(ball->dir));
 }
 

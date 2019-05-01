@@ -18,8 +18,6 @@ typedef struct Pad
 	int dir;
 } Pad;
 
-int getTexture(int padIndex);
-
 /**
  * Move the pad to the given position.
  * @param position required position of the pad

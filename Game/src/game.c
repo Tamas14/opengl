@@ -1,11 +1,13 @@
 #include "game.h"
 #include "utils.h"
 #include "GL/glut.h"
-#include <math.h> 
+#include <stdio.h>
+#include <math.h>
 
 void resize_game(Game* game, int width, int height)
 {
-	
+	game->width = width;
+    game->height = height;
 }
 
 void init(Game* game, int width, int height)
@@ -21,7 +23,7 @@ void init(Game* game, int width, int height)
 	game->ball.y = 0;
 	game->ball.dir = -90;
 	
-	game->pads[0].size = 100;
+	game->pads[0].size = 200;
 	game->pads[0].x = 0;
 	game->pads[0].y = 0;
 	game->pads[0].rotation = 0;
@@ -31,17 +33,6 @@ void init(Game* game, int width, int height)
 	{
 		generate(game, i);
 	}
-}
-
-void restart_game(Game* game)
-{
-    float center_x;
-    float center_y;
-
-    center_x = game->width / 2;
-    center_y = game->height / 2;
-
-    start_ball(&(game->ball), center_x, center_y);
 }
 
 void shift(Game* game)
@@ -100,7 +91,7 @@ void generate(Game* game, int i)
 		
 	else
 		tpads[i].rotation = game->rotation;
-	int j;
+	
 	printf("----- \n");
 	printf("%d, %d %d \n", i, game->dir, game->rotation);
 }
@@ -122,9 +113,30 @@ void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], do
     }
 }
 
-void update_game(Game* game, double time)
+int in = 0;
+void update_game(Game* game)
 {
-    update_ball(game, time);
+    update_ball(&game->ball);
+	
+	//printf("coords: (%f %f) (%f %f) \n", game->pads[1].x, game->pads[1].y, game->pads[1].x+game->pads[1].size, game->pads[1].y+game->pads[1].size);
+	//printf("dir: %d \n", game->pads[1].dir);
+	float car_x = game->ball.x;
+	float car_y = game->ball.y;
+	
+	float dist = sqrt(pow(car_x - game->pads[1].x, 2) + pow(car_y - game->pads[1].y, 2));
+	int size = game->pads[1].size;
+	float rsquare = pow(size, 2);
+	float radius = sqrt(2*rsquare);
+	
+	if (dist < radius/2)
+		in = 1;
+	
+	if(in && dist > radius/2)
+	{
+		in = 0;
+		shift(game);
+		generate(game, game->numberOfPads-1);
+	}
 }
 
 

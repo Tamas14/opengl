@@ -1,5 +1,7 @@
 #include "callbacks.h"
 #include "init.h"
+#include "time.h"
+#include <stdio.h>
 
 #include <GL/glut.h>
 

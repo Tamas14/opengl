@@ -37,7 +37,7 @@ void restart_game(Game* game);
  * Update the state of the game.
  * @param time elapsed time in seconds
  */
-void update_game(Game* game, double time);
+void update_game(Game* game);
 void shift(Game* game);
 void generate(Game* game, int i);
 void init(Game* game, int width, int height);

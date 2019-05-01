@@ -7,6 +7,7 @@
 #define CALLBACKS_H
 
 #include "game.h"
+#include "utils.h"
 
 #include <GL/glut.h>
 

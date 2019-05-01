@@ -4,6 +4,8 @@
 #define FALSE 0
 #define TRUE 1
 
+#include "game.h"
+
 /**
  * GLSL-like three dimensional vector
  */
@@ -39,5 +41,6 @@ typedef struct Material
  * Calculates radian from degree.
  */
 double degree_to_radian(double degree);
+void szovegKirajzolas(Game* game, float x, float y, char* s);
 
 #endif /* UTILS_H */

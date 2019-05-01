@@ -14,7 +14,6 @@ void display()
     glPushMatrix();
 
 	set_view(&camera);
-	//printf("%f, %f, %f, %f, %f, %f \n", camera.position.x, camera.position.y, camera.position.z, camera.rotation.x, camera.rotation.y, camera.rotation.z);
     draw_game(&game);
 
     glPopMatrix();
@@ -45,7 +44,7 @@ void reshape(GLsizei width, GLsizei height)
     glViewport(x, y, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 10000.0);
+    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 20000.0);
 
 }
 
@@ -60,11 +59,11 @@ void keyboard(unsigned char key, int x, int y)
 			generate(&game, game.numberOfPads-1);
 		break;
 		case 'w':
-			game.ball.speed_x = 2;
+			game.ball.acceleration = 1;
 		break;
 		
 		case 's':
-			game.ball.speed_x = -2;
+			game.ball.acceleration = 0;
 		break;
 		
 		case 'a':
@@ -81,10 +80,12 @@ void keyboard(unsigned char key, int x, int y)
 
 void keyboard_up(unsigned char key, int x, int y)
 { 	
+	x = y;
+	y = x;
 	switch (key) {
 		case 'w':
 		case 's':
-			game.ball.speed_x = 0;
+			game.ball.acceleration = 0;
 		break;
 		
 		case 'a':
@@ -106,7 +107,7 @@ void idle()
     last_frame_time = current_time;
 
 	update_camera(&camera, elapsed_time);
-    update_game(&game, elapsed_time);
+    update_game(&game);
 	
     glutPostRedisplay();
 }

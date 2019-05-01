@@ -3,6 +3,7 @@
 #include <obj/draw.h>
 #include "pad.h"
 #include "ball.h"
+#include "draw.h"
 #include "init.h"
 
 void init_opengl()
@@ -34,7 +35,19 @@ void init_opengl()
     glEnable(GL_TEXTURE_2D);
 
     glEnable(GL_LIGHTING);
+    glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_LIGHT0);
+    glEnable(GL_FOG);
+	glShadeModel(GL_SMOOTH);
+	
+	float fog_light[] = {0.6f, 0.6f, 0.6f, 0.1f };
+	
+	glFogf(GL_FOG_MODE, GL_LINEAR);
+	glFogf(GL_FOG_DENSITY, 0.5f);
+	glFogf(GL_FOG_START, 0.0f);
+	glFogf(GL_FOG_END, 400.0f);
+	glFogfv(GL_FOG_COLOR, fog_light);
+	
 	init_camera(&camera);
 	set_lightning();
 }
