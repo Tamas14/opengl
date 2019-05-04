@@ -16,6 +16,7 @@ typedef struct Game
     int width;
     int height;
 	int dir;
+	double dist;
 			 /** 
 			  * 0 - előre
 			  * 1 - balra

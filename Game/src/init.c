@@ -14,13 +14,16 @@ void init_opengl()
         "turnleft.png",
         "forward.png",
         "turnright.png",
-        "arrow.png"
+        "arrow.png",
+        "hegy.png"
     };
 	
 	load_model(&padmodel, "untitled.obj");
-	load_model(&ballmodel, "sphere.obj");
+	load_model(&ballmodel, "sphere2.obj");
+	load_model(&akadaly, "akadaly.obj");
+	
 	int i;
-	for(i = 0; i < 4; i++)
+	for(i = 0; i < 5; i++)
 	{
 		textures[i] = load_texture(texture_filenames[i]);
 	}

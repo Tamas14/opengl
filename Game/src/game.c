@@ -16,6 +16,7 @@ void init(Game* game, int width, int height)
 	game->rotation = 0;
     game->width = width;
     game->height = height;
+    game->dist = 0;
 	game->numberOfPads = sizeof(game->pads)/sizeof(game->pads[0]);
 	int i;
 	
@@ -48,10 +49,17 @@ void generate(Game* game, int i)
 {
 	int newx, newy, ymove;
 	Pad* tpads = game->pads;
-	game->dir = (rand()%3-1);
+	
+	if(i == 1)
+		game->dir = 0;
+	else
+		game->dir = (rand()%3-1);
 	
 	if(game->dir == 0)
+	{
 		ymove = -1;
+		tpads[i].hasAkadaly = rand()%2;
+	}
 	else
 		ymove = 0;
 	
@@ -92,8 +100,6 @@ void generate(Game* game, int i)
 	else
 		tpads[i].rotation = game->rotation;
 	
-	printf("----- \n");
-	printf("%d, %d %d \n", i, game->dir, game->rotation);
 }
 
 void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], double b[rowsB][colsB], double c[rowsA][colsB])

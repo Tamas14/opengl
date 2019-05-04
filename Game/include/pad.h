@@ -8,6 +8,7 @@
 
 GLuint textures[5];
 Model padmodel;
+Model akadaly;
 Model car;
 typedef struct Pad
 {
@@ -16,6 +17,7 @@ typedef struct Pad
     float y;
 	int rotation;
 	int dir;
+	int hasAkadaly;
 } Pad;
 
 /**

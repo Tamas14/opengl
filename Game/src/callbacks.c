@@ -3,7 +3,7 @@
 #include "init.h"
 float i = 0;
 
-#define VIEWPORT_RATIO (16.0 / 9.0)
+#define VIEWPORT_RATIO (16.0 / 8.5)
 #define VIEWPORT_ASPECT 80.0
 
 void display()
@@ -44,8 +44,7 @@ void reshape(GLsizei width, GLsizei height)
     glViewport(x, y, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 20000.0);
-
+    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 10000.0);
 }
 
 void keyboard(unsigned char key, int x, int y)
