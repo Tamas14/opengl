@@ -11,16 +11,16 @@ void init_opengl()
     glClearColor(1, 1, .5, 1);
 	
 	char texture_filenames[][32] = {
-        "turnleft.png",
-        "forward.png",
-        "turnright.png",
-        "arrow.png",
-        "hegy.png"
+        "textures/turnleft.png",
+        "textures/forward.png",
+        "textures/turnright.png",
+        "textures/obstacle.png",
+        "textures/snail.png"
     };
 	
-	load_model(&padmodel, "untitled.obj");
-	load_model(&ballmodel, "sphere2.obj");
-	load_model(&akadaly, "akadaly.obj");
+	load_model(&roadModel, "models/road.obj");
+	load_model(&snailModel, "models/snail.obj");
+	load_model(&obstacleModel, "models/obstacle.obj");
 	
 	int i;
 	for(i = 0; i < 5; i++)

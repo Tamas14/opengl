@@ -7,9 +7,9 @@
  */
 
 GLuint textures[5];
-Model padmodel;
-Model akadaly;
-Model car;
+Model roadModel;
+Model obstacleModel;
+
 typedef struct Pad
 {
 	int size;

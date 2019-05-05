@@ -6,7 +6,7 @@
 /**
  * Ball position and speed
  */
-Model ballmodel;
+Model snailModel;
 typedef struct Ball
 {
     float x;

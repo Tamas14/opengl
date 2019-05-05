@@ -42,11 +42,6 @@ GLuint load_texture(char* filename)
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    /*
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    */
-
     return texture_name;
 }
 
@@ -76,7 +71,7 @@ void draw_game(Game* game)
 			glRotatef(game->pads[i].rotation, 0, 0, 1);
 			glColor3f(1, 1, 1);
 			glScalef(s, s, 50);
-			draw_model(&padmodel);
+			draw_model(&roadModel);
 		glPopMatrix();
 			
 		glPushMatrix();
@@ -111,10 +106,11 @@ void draw_game(Game* game)
 				if(game->pads[i].hasAkadaly)
 				{
 					glPushMatrix();
-						glBindTexture(GL_TEXTURE_2D, textures[4]);
+					//TODO:
+						glBindTexture(GL_TEXTURE_2D, textures[3]);
 						glTranslatef(0, 0, 20);
 						glScalef(100, 100, 100);
-						draw_model(&akadaly);
+						draw_model(&obstacleModel);
 					glPopMatrix();
 				}
 			}
@@ -132,30 +128,16 @@ void draw_game(Game* game)
 					glEnd();
 				glPopMatrix();
 			}
-			
-			/*glBegin(GL_LINES);
-				glVertex3f(-game->pads[i].size/2, -game->pads[i].size/2, 1.0f);
-				glVertex3f(game->pads[i].size/2, -game->pads[i].size/2, 1.0f);
-
-				glVertex3f(-game->pads[i].size/2, -game->pads[i].size/2, 1.0f);
-				glVertex3f(-game->pads[i].size/2, game->pads[i].size/2, 1.0f);
-				
-				glVertex3f(+game->pads[i].size/2, +game->pads[i].size/2, 1.0f);
-				glVertex3f(-game->pads[i].size/2, game->pads[i].size/2, 1.0f);
-				
-				glVertex3f(+game->pads[i].size/2, -game->pads[i].size/2, 1.0f);
-				glVertex3f(+game->pads[i].size/2, +game->pads[i].size/2, 1.0f);
-			glEnd();*/
 		glPopMatrix();
 	}
 	
 	glPushMatrix();
-		glColor3f(0.6470, 0.2647, 0.2647);
-		glBindTexture(GL_TEXTURE_2D, textures[3]);
+		glColor3f(1, 1, 1);
+		glBindTexture(GL_TEXTURE_2D, textures[4]);
 		glTranslatef(game->ball.x, game->ball.y, 10);
 		glRotatef(game->ball.dir+90, 0, 0, 1);
 		glScalef(30, 30, 30);
-		draw_model(&ballmodel);
+		draw_model(&snailModel);
 		set_lightning();
 	glPopMatrix();
 	
