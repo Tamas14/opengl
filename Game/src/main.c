@@ -2,10 +2,7 @@
 #include "init.h"
 #include "time.h"
 #include <stdio.h>
-
 #include <GL/glut.h>
-
-#include <stdio.h>
 
 /**
  * Set the callbacks for GLUT.
@@ -37,8 +34,6 @@ int main(int argc, char* argv[])
 	init(&game, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
     init_opengl();
     set_callbacks();
-	
-	//gluPerspective(90, 1, -500, 500);
 
     glutMainLoop();
 

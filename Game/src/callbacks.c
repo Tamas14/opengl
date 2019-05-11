@@ -1,14 +1,12 @@
 #include "callbacks.h"
 #include "draw.h"
 #include "init.h"
-float i = 0;
-
 #define VIEWPORT_RATIO (16.0 / 8.5)
 #define VIEWPORT_ASPECT 80.0
 
 void display()
 {
-	glClearColor(.7, .7, .5, 1);
+	glClearColor(.8, .8, .8, .5);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
@@ -52,28 +50,28 @@ void keyboard(unsigned char key, int x, int y)
 	y = x;
 	x = y;
 	
-    switch (key) {
-		case 'r':
-			shift(&game);
-			generate(&game, game.numberOfPads-1);
-		break;
-		case 'w':
-			game.ball.acceleration = 1;
-		break;
-		
-		case 's':
-			game.ball.acceleration = 0;
-		break;
-		
-		case 'a':
-			game.ball.turning = -1;
-		break;
-		
-		case 'd':
-			game.ball.turning = 1;
-		break;
-    }
-
+	if(game.gameOver)
+	{
+		switch(key){
+			case 'r':
+				init(&game, game.width, game.height);
+			break;
+		}
+	}else{
+		switch (key) {
+			case 'w':
+				game.car.acceleration = 1;
+			break;
+			
+			case 'a':
+				game.car.turning = -1;
+			break;
+			
+			case 'd':
+				game.car.turning = 1;
+			break;
+		}
+	}
     glutPostRedisplay();
 }
 
@@ -82,14 +80,9 @@ void keyboard_up(unsigned char key, int x, int y)
 	x = y;
 	y = x;
 	switch (key) {
-		case 'w':
-		case 's':
-			game.ball.acceleration = 0;
-		break;
-		
 		case 'a':
 		case 'd':
-			game.ball.turning = 0;
+			game.car.turning = 0;
 		break;
 	}
     glutPostRedisplay();
@@ -97,16 +90,16 @@ void keyboard_up(unsigned char key, int x, int y)
 
 void idle()
 {
-    static int last_frame_time = 0;
-    int current_time;
-    double elapsed_time;
+    //static int last_frame_time = 0;
+    //int current_time;
+    //double elapsed_time;
    
-    current_time = glutGet(GLUT_ELAPSED_TIME);
-    elapsed_time = (double)(current_time - last_frame_time) / 1000;
-    last_frame_time = current_time;
+    //current_time = glutGet(GLUT_ELAPSED_TIME);
+    //elapsed_time = (double)(current_time - last_frame_time) / 1000;
+    //last_frame_time = current_time;
 
-	update_camera(&camera, elapsed_time);
     update_game(&game);
+	update_camera(&camera, &game);
 	
     glutPostRedisplay();
 }

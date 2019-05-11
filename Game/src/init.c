@@ -1,31 +1,32 @@
 #include <GL/glut.h>
 #include <obj/load.h>
 #include <obj/draw.h>
-#include "pad.h"
-#include "ball.h"
+#include "road.h"
+#include "car.h"
 #include "draw.h"
 #include "init.h"
 
 void init_opengl()
 {
-    glClearColor(1, 1, .5, 1);
-	
 	char texture_filenames[][32] = {
         "textures/turnleft.png",
         "textures/forward.png",
         "textures/turnright.png",
         "textures/obstacle.png",
-        "textures/snail.png"
+        "textures/snail.png",
+        "textures/grass.png"
     };
+	
+	int repeat[] = {0, 0, 0, 0, 0, 0};
 	
 	load_model(&roadModel, "models/road.obj");
 	load_model(&snailModel, "models/snail.obj");
 	load_model(&obstacleModel, "models/obstacle.obj");
 	
 	int i;
-	for(i = 0; i < 5; i++)
+	for(i = 0; i < 6; i++)
 	{
-		textures[i] = load_texture(texture_filenames[i]);
+		textures[i] = load_texture(texture_filenames[i], repeat[i]);
 	}
 	
     glMatrixMode(GL_MODELVIEW);
@@ -43,7 +44,7 @@ void init_opengl()
     glEnable(GL_FOG);
 	glShadeModel(GL_SMOOTH);
 	
-	float fog_light[] = {0.6f, 0.6f, 0.6f, 0.1f };
+	float fog_light[] = {0.6f, 0.6f, 0.6f, 0.1f};
 	
 	glFogf(GL_FOG_MODE, GL_LINEAR);
 	glFogf(GL_FOG_DENSITY, 0.5f);

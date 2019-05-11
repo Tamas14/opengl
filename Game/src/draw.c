@@ -23,7 +23,7 @@ void set_lightning()
     glLightfv(GL_LIGHT0, GL_POSITION, position);
 }
 
-GLuint load_texture(char* filename)
+GLuint load_texture(char* filename, int repeat)
 {
     GLuint texture_name;
     glGenTextures(1, &texture_name);
@@ -36,8 +36,14 @@ GLuint load_texture(char* filename)
     glBindTexture(GL_TEXTURE_2D, texture_name);
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, (Pixel*)image);
 
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	if(repeat)
+	{
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	}else{
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+	}
 	
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -45,31 +51,30 @@ GLuint load_texture(char* filename)
     return texture_name;
 }
 
-char segedSting[200];
+char txtString[200];
 void draw_game(Game* game)
 {	
-	camera.position.x = game->ball.x - sin(degree_to_radian(game->ball.dir+90))*60;
-	camera.position.y = game->ball.y + cos(degree_to_radian(game->ball.dir+90))*60;
-	camera.position.z = 45;
+	glColor3f(1, 1, 1);
 	
-	camera.rotation.x = 60.0;
-    camera.rotation.y = 0;
-    camera.rotation.z = 270.0 + game->ball.dir;
-	
+	glPushMatrix();
+		glBindTexture(GL_TEXTURE_2D, textures[5]);
+		glTranslatef(game->car.x, game->car.y, 0);
+		glScalef(1000, 1000, 0);
+		draw_model(&roadModel);
+	glPopMatrix();
+
 	int i;
-	
 	for(i=0; i < game->numberOfPads; i++)
 	{
-		float x1 = game->pads[i].x;
-		float y1 = game->pads[i].y;
-		float s = game->pads[i].size;
+		float x1 = game->roads[i].x;
+		float y1 = game->roads[i].y;
+		float s = game->roads[i].size;
 		
 		glPushMatrix();
-			glBindTexture(GL_TEXTURE_2D, textures[game->pads[i].dir]);
+			glBindTexture(GL_TEXTURE_2D, textures[game->roads[i].dir]);
 			
 			glTranslatef(x1, y1, 0);
-			glRotatef(game->pads[i].rotation, 0, 0, 1);
-			glColor3f(1, 1, 1);
+			glRotatef(game->roads[i].rotation, 0, 0, 1);
 			glScalef(s, s, 50);
 			draw_model(&roadModel);
 		glPopMatrix();
@@ -78,35 +83,11 @@ void draw_game(Game* game)
 			glTranslatef(x1, y1, 5);
 			glLineWidth(30);
 			
-			if(game->pads[i].dir == 2)
+			if(game->roads[i].dir == 1)
 			{
-				glPushMatrix();
-					glRotated(game->pads[i].rotation, 0, 0, 1);
-					glBegin(GL_LINES);
-						glVertex3f(+s/2, -s/2, 1.0f);
-						glVertex3f(-s/2, -s/2, 1.0f);
-						glVertex3f(-s/2, -s/2, 1.0f);
-						glVertex3f(-s/2, +s/2, 1.0f);
-					glEnd();
-				glPopMatrix();
-			}
-			
-			if(game->pads[i].dir == 1)
-			{
-				glPushMatrix();
-					glRotated(game->pads[i].rotation, 0, 0, 1);
-					glBegin(GL_LINES);
-						glVertex3f(-s/2, -s/2, 1.0f);
-						glVertex3f(-s/2, +s/2, 1.0f);
-						glVertex3f(+s/2, -s/2, 1.0f);
-						glVertex3f(+s/2, +s/2, 1.0f);
-					glEnd();
-				glPopMatrix();
-				
-				if(game->pads[i].hasAkadaly)
+				if(game->roads[i].hasAkadaly)
 				{
 					glPushMatrix();
-					//TODO:
 						glBindTexture(GL_TEXTURE_2D, textures[3]);
 						glTranslatef(0, 0, 20);
 						glScalef(100, 100, 100);
@@ -114,37 +95,25 @@ void draw_game(Game* game)
 					glPopMatrix();
 				}
 			}
-			
-			if(game->pads[i].dir == 0)
-			{
-				glPushMatrix();
-					glRotated(game->pads[i].rotation, 0, 0, 1);
-					glBegin(GL_LINES);
-						
-						glVertex3f(-s/2, -s/2, 1.0f);
-						glVertex3f(-s/2, +s/2, 1.0f);
-						glVertex3f(-s/2, +s/2, 1.0f);
-						glVertex3f(+s/2, +s/2, 1.0f);
-					glEnd();
-				glPopMatrix();
-			}
+
 		glPopMatrix();
 	}
 	
 	glPushMatrix();
-		glColor3f(1, 1, 1);
 		glBindTexture(GL_TEXTURE_2D, textures[4]);
-		glTranslatef(game->ball.x, game->ball.y, 10);
-		glRotatef(game->ball.dir+90, 0, 0, 1);
-		glScalef(30, 30, 30);
+		glTranslatef(game->car.x, game->car.y, 10);
+		glRotatef(game->car.dir+90, 0, 0, 1);
+		glScalef(30, 30, 25);
 		draw_model(&snailModel);
 		set_lightning();
 	glPopMatrix();
 	
-	game->dist += game->ball.speed_x * (glutGet(GLUT_ELAPSED_TIME)/1000.0 / (60*60*60));
+	if(!game->gameOver)
+	game->dist += game->car.speed_x * (glutGet(GLUT_ELAPSED_TIME)/1000.0 / (60*60*60));
 	
-	sprintf(segedSting, "Speed: %f km/h", game->ball.speed_x);
-	szovegKirajzolas(game, 0, 800, segedSting);
-	sprintf(segedSting, "Distance: %f km", game->dist);
-	szovegKirajzolas(game, 0, 750, segedSting);
+	sprintf(txtString, "Speed: %.0f km/h", game->car.speed_x);
+	drawTextToScreen(game, 0, 800, txtString);
+	sprintf(txtString, "Distance: %.4f km", game->dist);
+	drawTextToScreen(game, 0, 750, txtString);
 }
+

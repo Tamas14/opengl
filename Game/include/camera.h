@@ -14,38 +14,19 @@ typedef struct Camera
 } Camera;
 
 /**
- * Is the texture preview visible?
- */
-int is_preview_visible;
-
-/**
  * Initialize the camera to the start position.
  */
 void init_camera(Camera* camera);
 
 /**
- * Update the position of the camera.
+ * Update the position, rotation of the camera.
  */
-void update_camera(Camera* camera, double time);
+void update_camera(Camera* camera, Game* game);
 
 /**
  * Apply the camera settings to the view transformation.
  */
 void set_view(const Camera* camera);
 
-/**
- * Set the horizontal and vertical rotation of the view angle.
- */
-void rotate_camera(Camera* camera, double x, double y, double z);
-
-/**
- * Set the speed of forward and backward motion.
- */
-void set_camera_speed(Camera* camera, double speed);
-
-/**
- * Set the speed of left and right side steps.
- */
-void set_camera_side_speed(Camera* camera, double speed);
 
 #endif /* CAMERA_H */

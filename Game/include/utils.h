@@ -41,6 +41,25 @@ typedef struct Material
  * Calculates radian from degree.
  */
 double degree_to_radian(double degree);
-void szovegKirajzolas(Game* game, float x, float y, char* s);
+
+/**
+ * Sets up the scene for orthographics
+ */
+void Ortho(Game* game);
+
+/**
+ * Sets up the scene for projection
+ */
+void Perspective(Game* game);
+
+/**
+ * Draws text to the screen
+ */
+void drawTextToScreen(Game* game, float x, float y, char* s);
+
+/**
+ * Adding the numbers in an array
+ */
+int sumArray(int arr[], int len);
 
 #endif /* UTILS_H */

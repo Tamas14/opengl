@@ -12,23 +12,25 @@ void resize_game(Game* game, int width, int height)
 
 void init(Game* game, int width, int height)
 {
+	game->gameOver = 0;
 	game->dir = 0;
 	game->rotation = 0;
     game->width = width;
     game->height = height;
     game->dist = 0;
-	game->numberOfPads = sizeof(game->pads)/sizeof(game->pads[0]);
+	game->numberOfPads = sizeof(game->roads)/sizeof(game->roads[0]);
 	int i;
 	
-	game->ball.x = 0;
-	game->ball.y = 0;
-	game->ball.dir = -90;
+	game->car.x = 0;
+	game->car.y = 0;
+	game->car.dir = -90;
 	
-	game->pads[0].size = 200;
-	game->pads[0].x = 0;
-	game->pads[0].y = 0;
-	game->pads[0].rotation = 0;
-	game->pads[0].dir = 1;
+	game->roads[0].size = 200;
+	game->roads[0].x = 0;
+	game->roads[0].y = 0;
+	game->roads[0].rotation = 0;
+	game->roads[0].dir = 1;
+	game->roads[0].hasAkadaly = 0;
 	
 	for(i = 1; i < game->numberOfPads; i++)
 	{
@@ -41,14 +43,14 @@ void shift(Game* game)
 	int i;
 	for(i = 1; i < game->numberOfPads; i++)
 	{
-		game->pads[i-1] = game->pads[i];
+		game->roads[i-1] = game->roads[i];
 	}
 }
 
 void generate(Game* game, int i)
 {
 	int newx, newy, ymove;
-	Pad* tpads = game->pads;
+	Road* troads = game->roads;
 	
 	if(i == 1)
 		game->dir = 0;
@@ -58,7 +60,7 @@ void generate(Game* game, int i)
 	if(game->dir == 0)
 	{
 		ymove = -1;
-		tpads[i].hasAkadaly = rand()%2;
+		troads[i].hasAkadaly = rand()%2;
 	}
 	else
 		ymove = 0;
@@ -67,8 +69,6 @@ void generate(Game* game, int i)
 	
 	double angle = degree_to_radian(game->rotation);
 	
-	/*double a[2][2] = { {cos(angle), -sin(angle)},
-					  {sin(angle),  cos(angle)} }; */
 	double a[2][2]; 
 	a[0][0] = cos(angle);
 	a[0][1] = -sin(angle);
@@ -80,25 +80,25 @@ void generate(Game* game, int i)
 	
 	mult(2, 2, 2, 1, a, b, c);
 
-	newx = tpads[i-1].size*c[0][0] + tpads[i-1].x;
-	newy = tpads[i-1].size*c[1][0] + tpads[i-1].y;
+	newx = troads[i-1].size*c[0][0] + troads[i-1].x;
+	newy = troads[i-1].size*c[1][0] + troads[i-1].y;
 	
 	newx = round(newx/10.0)*10;
 	newy = round(newy/10.0)*10;
 	
-	tpads[i].x = newx;
-	tpads[i].y = newy;
-	tpads[i].size = tpads[i-1].size;
-	tpads[i].dir = game->dir+1;
+	troads[i].x = newx;
+	troads[i].y = newy;
+	troads[i].size = troads[i-1].size;
+	troads[i].dir = game->dir+1;
 	
 	if(game->dir != 0)
 		if(game->dir == -1)
-			tpads[i].rotation = game->rotation;
+			troads[i].rotation = game->rotation;
 		else
-			tpads[i].rotation = game->rotation - 180;
+			troads[i].rotation = game->rotation - 180;
 		
 	else
-		tpads[i].rotation = game->rotation;
+		troads[i].rotation = game->rotation;
 	
 }
 
@@ -122,26 +122,41 @@ void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], do
 int in = 0;
 void update_game(Game* game)
 {
-    update_ball(&game->ball);
+    update_ball(&game->car);
 	
-	//printf("coords: (%f %f) (%f %f) \n", game->pads[1].x, game->pads[1].y, game->pads[1].x+game->pads[1].size, game->pads[1].y+game->pads[1].size);
-	//printf("dir: %d \n", game->pads[1].dir);
-	float car_x = game->ball.x;
-	float car_y = game->ball.y;
 	
-	float dist = sqrt(pow(car_x - game->pads[1].x, 2) + pow(car_y - game->pads[1].y, 2));
-	int size = game->pads[1].size;
-	float rsquare = pow(size, 2);
-	float radius = sqrt(2*rsquare);
+	float car_x = game->car.x;
+	float car_y = game->car.y;
+	int isin[game->numberOfPads], i;
 	
-	if (dist < radius/2)
+	for(i = 0; i < game->numberOfPads; i++)
+	{
+		float x1 = game->roads[i].x;
+		float y1 = game->roads[i].y;
+		float shalf = game->roads[i].size/2;
+		
+		isin[i] = 0;
+		if( x1-shalf < car_x && y1-shalf < car_y &&
+			x1+shalf > car_x && y1+shalf > car_y)
+		{
+			isin[i] = 1;
+		}
+	}
+	
+	if(isin[1])
 		in = 1;
 	
-	if(in && dist > radius/2)
+	if(in && isin[2])
 	{
 		in = 0;
 		shift(game);
 		generate(game, game->numberOfPads-1);
+	}
+	
+	if(sumArray(isin, game->numberOfPads) < 1 || isin[3] || isin[4])
+	{
+		game->gameOver = 1;
+		game->car.acceleration = 2;
 	}
 }
 

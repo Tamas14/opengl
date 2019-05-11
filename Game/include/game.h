@@ -1,27 +1,24 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "ball.h"
-#include "pad.h"
+#include "car.h"
+#include "road.h"
 
 /**
  * Game state representation
  */
 typedef struct Game
 {
-    Ball ball;
-	Pad pads[5];
+    Car car;
+	Road roads[5];
 	int numberOfPads;
 	int rotation;
     int width;
     int height;
 	int dir;
 	double dist;
-			 /** 
-			  * 0 - előre
-			  * 1 - balra
-			  * 2 - jobbra
-			  */
+	int gameOver;
+	
 } Game;
 
 /**
