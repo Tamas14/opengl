@@ -1,8 +1,11 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <stdio.h>
+#include <math.h>
 #include "car.h"
 #include "road.h"
+#include "GL/glut.h"
 
 /**
  * Game state representation
@@ -36,10 +39,9 @@ void restart_game(Game* game);
  * @param time elapsed time in seconds
  */
 void update_game(Game* game);
-void shift(Game* game);
-void generate(Game* game, int i);
+
+
 void init(Game* game, int width, int height);
-void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], double b[rowsB][colsB], double c[rowsA][colsB]);
 
 
 

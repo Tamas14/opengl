@@ -1,9 +1,5 @@
 #include "camera.h"
 
-#include <GL/glut.h>
-
-#include <math.h>
-
 void init_camera(Camera* camera)
 {
     camera->position.x = 0;

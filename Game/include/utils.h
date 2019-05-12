@@ -4,7 +4,13 @@
 #define FALSE 0
 #define TRUE 1
 
+#include "GL/glut.h"
 #include "game.h"
+
+#include <SOIL/SOIL.h>
+#include <math.h>
+
+typedef GLubyte Pixel[3];
 
 /**
  * GLSL-like three dimensional vector
@@ -37,6 +43,8 @@ typedef struct Material
     float shininess;
 } Material;
 
+GLuint load_texture(char* filename, int repeat);
+
 /**
  * Calculates radian from degree.
  */
@@ -61,5 +69,20 @@ void drawTextToScreen(Game* game, float x, float y, char* s);
  * Adding the numbers in an array
  */
 int sumArray(int arr[], int len);
+
+/**
+ * Multiplies two matrices
+ */
+void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], double b[rowsB][colsB], double c[rowsA][colsB]);
+
+/**
+ * Shift the road array
+ */
+void shift(Game* game);
+
+/**
+ * Generate road
+ */
+void generate(Game* game, int i);
 
 #endif /* UTILS_H */

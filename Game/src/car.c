@@ -1,7 +1,7 @@
 #include "car.h"
 #include "utils.h"
 
-void update_ball(Car* car)
+void update_car(Car* car)
 {
 	car->dir -= car->turning*3;
 	

@@ -1,6 +1,5 @@
 #include "callbacks.h"
-#include "draw.h"
-#include "init.h"
+
 #define VIEWPORT_RATIO (16.0 / 8.5)
 #define VIEWPORT_ASPECT 80.0
 
@@ -90,14 +89,6 @@ void keyboard_up(unsigned char key, int x, int y)
 
 void idle()
 {
-    //static int last_frame_time = 0;
-    //int current_time;
-    //double elapsed_time;
-   
-    //current_time = glutGet(GLUT_ELAPSED_TIME);
-    //elapsed_time = (double)(current_time - last_frame_time) / 1000;
-    //last_frame_time = current_time;
-
     update_game(&game);
 	update_camera(&camera, &game);
 	

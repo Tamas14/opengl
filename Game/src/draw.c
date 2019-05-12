@@ -1,12 +1,9 @@
 #include "draw.h"
 #include "GL/glut.h"
-#include <SOIL/SOIL.h>
 #include <stdio.h>
 #include "init.h"
 #include "utils.h"
 #include <obj/draw.h>
-
-typedef GLubyte Pixel[3];
 
 void set_lightning()
 {
@@ -21,34 +18,6 @@ void set_lightning()
     glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0.0f);
     glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
-}
-
-GLuint load_texture(char* filename, int repeat)
-{
-    GLuint texture_name;
-    glGenTextures(1, &texture_name);
-
-    int width;
-    int height;
-
-    Pixel* image = (Pixel*)SOIL_load_image(filename, &width, &height, 0, SOIL_LOAD_RGB);
-
-    glBindTexture(GL_TEXTURE_2D, texture_name);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, (Pixel*)image);
-
-	if(repeat)
-	{
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	}else{
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-		glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	}
-	
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-
-    return texture_name;
 }
 
 char txtString[200];
@@ -115,5 +84,11 @@ void draw_game(Game* game)
 	drawTextToScreen(game, 0, 800, txtString);
 	sprintf(txtString, "Distance: %.4f km", game->dist);
 	drawTextToScreen(game, 0, 750, txtString);
+	
+	if(game->gameOver)
+	{
+		sprintf(txtString, "Game Over");
+		drawTextToScreen(game, game->width/2, game->height/2, txtString);
+	}
 }
 

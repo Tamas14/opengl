@@ -8,7 +8,8 @@
 
 #include "game.h"
 #include "utils.h"
-
+#include "draw.h"
+#include "init.h"
 #include <GL/glut.h>
 
 /**
