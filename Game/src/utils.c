@@ -115,11 +115,11 @@ void generate(Game* game, int i)
 		troads[i].rotation = game->rotation;
 }
 
-void Perspective(Game* game) {
+void Perspective() {
     glPushMatrix();
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
-			gluPerspective(80, (double) game->width / game->height, 0.01, 20000.0);
+			gluPerspective(80, (double) VIEWPORT_RATIO, 0.01, 20000.0);
 			glMatrixMode(GL_MODELVIEW);
     glPopMatrix();
 }
@@ -159,6 +159,6 @@ void drawTextToScreen(Game* game, float x, float y, char* s) {
 		glEnable(GL_DEPTH_TEST);
     glPopMatrix();
 	
-	Perspective(game);
+	Perspective();
     glEnable(GL_LIGHTING);
 }

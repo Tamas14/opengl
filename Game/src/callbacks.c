@@ -1,8 +1,5 @@
 #include "callbacks.h"
 
-#define VIEWPORT_RATIO (16.0 / 8.5)
-#define VIEWPORT_ASPECT 80.0
-
 void display()
 {
 	glClearColor(.8, .8, .8, .5);
@@ -41,7 +38,7 @@ void reshape(GLsizei width, GLsizei height)
     glViewport(x, y, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 10000.0);
+    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 20000.0);
 }
 
 void keyboard(unsigned char key, int x, int y)

@@ -3,8 +3,9 @@
 #include <GL/glut.h>
 #include <obj/model.h>
 #include <math.h>
+
 /**
- * Ball position and speed
+ * Car struct
  */
 Model snailModel;
 
@@ -15,11 +16,13 @@ typedef struct Car
     float dir;
     float speed_x;
 	float vel_x;
-	float vel_y;
 	int acceleration;
     int turning;
 } Car;
 
+/**
+ * Moving the car
+ */
 void update_car(Car* car);
 
 #endif /* BALL_H */

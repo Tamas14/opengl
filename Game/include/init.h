@@ -3,7 +3,6 @@
 
 #include "camera.h"
 
-Camera camera;
 /**
  * Initialize the OpenGL context.
  */

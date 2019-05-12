@@ -4,9 +4,6 @@
 #include <stdio.h>
 #include <GL/glut.h>
 
-/**
- * Set the callbacks for GLUT.
- */
 void set_callbacks()
 {
     glutDisplayFunc(display);
@@ -16,9 +13,6 @@ void set_callbacks()
     glutIdleFunc(idle);
 }
 
-/**
- * Main function
- */
 int main(int argc, char* argv[])
 {
     int window;

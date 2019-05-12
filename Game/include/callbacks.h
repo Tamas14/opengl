@@ -1,12 +1,8 @@
-/**
- * NOTE: For further callbacks see:
- *       https://www.opengl.org/resources/libraries/glut/spec3/node45.html
- */
-
 #ifndef CALLBACKS_H
 #define CALLBACKS_H
 
 #include "game.h"
+#include "camera.h"
 #include "utils.h"
 #include "draw.h"
 #include "init.h"

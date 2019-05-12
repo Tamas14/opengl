@@ -3,6 +3,8 @@
 
 #define FALSE 0
 #define TRUE 1
+#define VIEWPORT_RATIO (16.0 / 8.5)
+#define VIEWPORT_ASPECT 80.0
 
 #include "GL/glut.h"
 #include "game.h"
@@ -58,7 +60,7 @@ void Ortho(Game* game);
 /**
  * Sets up the scene for projection
  */
-void Perspective(Game* game);
+void Perspective();
 
 /**
  * Draws text to the screen

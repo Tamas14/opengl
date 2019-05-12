@@ -36,11 +36,12 @@ void restart_game(Game* game);
 
 /**
  * Update the state of the game.
- * @param time elapsed time in seconds
  */
 void update_game(Game* game);
 
-
+/**
+ * Sets up the game with default parameters
+ */
 void init(Game* game, int width, int height);
 
 

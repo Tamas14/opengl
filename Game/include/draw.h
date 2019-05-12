@@ -8,6 +8,9 @@
  */
 void draw_game(Game* game);
 
+/**
+ * Sets the lights
+ */
 void set_lightning();
 
 #endif /* DRAW_H */

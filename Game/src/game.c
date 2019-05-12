@@ -1,6 +1,6 @@
 #include "game.h"
-
 #include "utils.h"
+
 void resize_game(Game* game, int width, int height)
 {
 	game->width = width;
