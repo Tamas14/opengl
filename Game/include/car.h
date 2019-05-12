@@ -20,6 +20,6 @@ typedef struct Car
     int turning;
 } Car;
 
-void update_ball(Car* car);
+void update_car(Car* car);
 
 #endif /* BALL_H */
