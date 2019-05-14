@@ -39,7 +39,6 @@ void init(Game* game, int width, int height)
 }
 
 int in = 0;
-int belement = 0;
 void update_game(Game* game)
 {
 	update_car(&game->car);

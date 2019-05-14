@@ -25,26 +25,8 @@ typedef struct vec3
 } vec3;
 
 /**
- * Color with RGB components
+ * Loading textures.
  */
-typedef struct Color
-{
-	float red;
-	float green;
-	float blue;
-} Color;
-
-/**
- * Material
- */
-typedef struct Material
-{
-	struct Color ambient; 
-	struct Color diffuse; 
-	struct Color specular; 
-	float shininess;
-} Material;
-
 GLuint load_texture(char* filename);
 
 /**
