@@ -11,6 +11,6 @@ void draw_game(Game* game);
 /**
  * Sets the lights
  */
-void set_lightning();
+void set_lighting();
 
 #endif

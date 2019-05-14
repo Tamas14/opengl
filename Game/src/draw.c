@@ -5,7 +5,7 @@
 #include "utils.h"
 #include <obj/draw.h>
 
-void set_lightning()
+void set_lighting()
 {
 	float ambient_light[] = { 	0.988f, 0.831f, 0.250f, 0.3f };
     float diffuse_light[] = { 	1.0f, 1.0f, 1.0f, 0.5f };
@@ -28,7 +28,7 @@ void draw_game(Game* game)
 	glPushMatrix();
 		glBindTexture(GL_TEXTURE_2D, textures[5]);
 		glTranslatef(game->car.x, game->car.y, 0);
-		glScalef(1000, 1000, 0);
+		glScalef(1000, 1000, 1);
 		draw_model(&roadModel);
 	glPopMatrix();
 
@@ -55,7 +55,6 @@ void draw_game(Game* game)
 			glTranslatef(x1, y1, 5);
 			glLineWidth(30);
 			
-
 			if(game->roads[i].hasObstacle)
 			{
 				float offset = game->roads[i].obstacleOffset;
@@ -77,11 +76,11 @@ void draw_game(Game* game)
 		glRotatef(game->car.dir+90, 0, 0, 1);
 		glScalef(30, 30, 25);
 		draw_model(&snailModel);
-		set_lightning();
+		set_lighting();
 	glPopMatrix();
 	
 	if(!game->gameOver)
-	game->dist += game->car.speed_x * (glutGet(GLUT_ELAPSED_TIME)/1000.0 / (60*60*60));
+		game->dist += game->car.speed_x * (glutGet(GLUT_ELAPSED_TIME)/1000.0 / (60*60*60));
 	
 	sprintf(txtString, "Speed: %.0f km/h", game->car.speed_x);
 	drawTextToScreen(game, 0, 800, txtString);
@@ -102,4 +101,3 @@ void draw_game(Game* game)
 		glPopMatrix();
 	}
 }
-

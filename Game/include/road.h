@@ -28,6 +28,4 @@ typedef struct Road
 	float obstacleOffset;
 } Road;
 
-
-
 #endif

@@ -31,5 +31,4 @@ void update_camera(Camera* camera, Game* game);
  */
 void set_view(const Camera* camera);
 
-
 #endif

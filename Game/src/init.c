@@ -19,8 +19,6 @@ void init_opengl()
         "textures/forwardwhelp.png"
     };
 	
-	int repeat[] = {0, 0, 0, 0, 0, 0};
-	
 	load_model(&roadModel, "models/road.obj");
 	load_model(&snailModel, "models/snail.obj");
 	load_model(&obstacleModel, "models/obstacle.obj");
@@ -28,7 +26,7 @@ void init_opengl()
 	int i;
 	for(i = 0; i < 8; i++)
 	{
-		textures[i] = load_texture(texture_filenames[i], repeat[i]);
+		textures[i] = load_texture(texture_filenames[i]);
 	}
 	
     glMatrixMode(GL_MODELVIEW);
@@ -55,6 +53,4 @@ void init_opengl()
 	glFogfv(GL_FOG_COLOR, fog_light);
 	
 	init_camera(&camera);
-	set_lightning();
 }
-

@@ -91,4 +91,3 @@ void idle()
 	
     glutPostRedisplay();
 }
-

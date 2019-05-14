@@ -45,7 +45,7 @@ typedef struct Material
     float shininess;
 } Material;
 
-GLuint load_texture(char* filename, int repeat);
+GLuint load_texture(char* filename);
 
 /**
  * Calculates radian from degree.

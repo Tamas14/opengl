@@ -44,6 +44,4 @@ void update_game(Game* game);
  */
 void init(Game* game, int width, int height);
 
-
-
 #endif
