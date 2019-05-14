@@ -21,7 +21,7 @@ typedef struct Game
 	int dir;
 	double dist;
 	int gameOver;
-	
+	int drawhelp;
 } Game;
 
 /**
@@ -46,4 +46,4 @@ void init(Game* game, int width, int height);
 
 
 
-#endif /* GAME_H */
+#endif

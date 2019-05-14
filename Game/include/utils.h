@@ -87,4 +87,4 @@ void shift(Game* game);
  */
 void generate(Game* game, int i);
 
-#endif /* UTILS_H */
+#endif

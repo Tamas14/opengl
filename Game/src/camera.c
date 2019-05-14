@@ -15,7 +15,7 @@ void update_camera(Camera* camera, Game* game)
     camera->position.x = game->car.x - sin(degree_to_radian(game->car.dir+90))*60;
 	camera->position.y = game->car.y + cos(degree_to_radian(game->car.dir+90))*60;
 	camera->position.z = 45;
-	
+
 	camera->rotation.x = 60.0;
     camera->rotation.y = 0;
     camera->rotation.z = 270.0 + game->car.dir;

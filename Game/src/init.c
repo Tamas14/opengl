@@ -14,7 +14,9 @@ void init_opengl()
         "textures/turnright.png",
         "textures/obstacle.png",
         "textures/snail.png",
-        "textures/grass.png"
+        "textures/plain.png",
+        "textures/gameover.png",
+        "textures/forwardwhelp.png"
     };
 	
 	int repeat[] = {0, 0, 0, 0, 0, 0};
@@ -24,7 +26,7 @@ void init_opengl()
 	load_model(&obstacleModel, "models/obstacle.obj");
 	
 	int i;
-	for(i = 0; i < 6; i++)
+	for(i = 0; i < 8; i++)
 	{
 		textures[i] = load_texture(texture_filenames[i], repeat[i]);
 	}

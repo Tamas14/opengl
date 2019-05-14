@@ -40,7 +40,10 @@ void draw_game(Game* game)
 		float s = game->roads[i].size;
 		
 		glPushMatrix();
-			glBindTexture(GL_TEXTURE_2D, textures[game->roads[i].dir]);
+			if(i == 0 && game->drawhelp)
+				glBindTexture(GL_TEXTURE_2D, textures[7]);
+			else
+				glBindTexture(GL_TEXTURE_2D, textures[game->roads[i].dir]);
 			
 			glTranslatef(x1, y1, 0);
 			glRotatef(game->roads[i].rotation, 0, 0, 1);
@@ -52,17 +55,17 @@ void draw_game(Game* game)
 			glTranslatef(x1, y1, 5);
 			glLineWidth(30);
 			
-			if(game->roads[i].dir == 1)
+
+			if(game->roads[i].hasObstacle)
 			{
-				if(game->roads[i].hasAkadaly)
-				{
-					glPushMatrix();
-						glBindTexture(GL_TEXTURE_2D, textures[3]);
-						glTranslatef(0, 0, 20);
-						glScalef(100, 100, 100);
-						draw_model(&obstacleModel);
-					glPopMatrix();
-				}
+				float offset = game->roads[i].obstacleOffset;
+
+				glPushMatrix();
+					glBindTexture(GL_TEXTURE_2D, textures[3]);
+					glTranslatef(offset, 0, 20);
+					glScalef(100, 100, 120);
+					draw_model(&obstacleModel);
+				glPopMatrix();
 			}
 
 		glPopMatrix();
@@ -87,8 +90,16 @@ void draw_game(Game* game)
 	
 	if(game->gameOver)
 	{
-		sprintf(txtString, "Game Over");
-		drawTextToScreen(game, game->width/2, game->height/2, txtString);
+		glPushMatrix();
+			glBindTexture(GL_TEXTURE_2D, textures[6]);
+			glTranslatef(game->car.x - sin(degree_to_radian(game->car.dir+90))*30,
+			game->car.y + cos(degree_to_radian(game->car.dir+90))*30, 30);
+			glRotatef(90, 1, 0, 0);
+			glRotatef(game->car.dir+90, 0, 1, 0);
+			
+			glScalef(75, 30, 10);
+			draw_model(&roadModel);
+		glPopMatrix();
 	}
 }
 

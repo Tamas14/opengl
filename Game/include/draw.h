@@ -13,4 +13,4 @@ void draw_game(Game* game);
  */
 void set_lightning();
 
-#endif /* DRAW_H */
+#endif

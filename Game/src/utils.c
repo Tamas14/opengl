@@ -74,10 +74,16 @@ void generate(Game* game, int i)
 	if(game->dir == 0)
 	{
 		ymove = -1;
-		troads[i].hasAkadaly = rand()%2;
+		troads[i].hasObstacle = rand()%2;
+		
+		if(troads[i].hasObstacle)
+			troads[i].obstacleOffset = (rand()%11-5)*10;
 	}
 	else
+	{
 		ymove = 0;
+		troads[i].hasObstacle = 0;
+	}
 	
 	game->rotation = (game->rotation + 90*game->dir*(-1)) % 360;
 	

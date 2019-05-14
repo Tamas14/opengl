@@ -8,4 +8,4 @@
  */
 void init_opengl();
 
-#endif /* INIT_H */
+#endif

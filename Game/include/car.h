@@ -25,4 +25,4 @@ typedef struct Car
  */
 void update_car(Car* car);
 
-#endif /* BALL_H */
+#endif

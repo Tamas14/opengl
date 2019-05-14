@@ -40,4 +40,4 @@ void keyboard_up(unsigned char key, int x, int y);
  */
 void idle();
 
-#endif /* CALLBACKS_H */
+#endif

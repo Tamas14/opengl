@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
     glutInitWindowSize(1000, 800);   
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 
-    window = glutCreateWindow("");
+    window = glutCreateWindow("Snail on a road");
     glutSetWindow(window);
 
 	init(&game, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));

@@ -24,8 +24,10 @@ typedef struct Road
     float y;
 	int rotation;
 	int dir;
-	int hasAkadaly;
+	int hasObstacle;
+	float obstacleOffset;
 } Road;
+
 
 
 #endif

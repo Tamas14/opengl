@@ -12,7 +12,10 @@ void update_car(Car* car)
 		if(car->speed_x+car->vel_x > 50)
 			car->vel_x = 0;
 	}else if(car->acceleration == 2)
+	{
 		car->vel_x = -5;
+	}else if(car->acceleration == 3)
+		car->vel_x = -50;
 	
 	
 	car->speed_x += car->vel_x;
