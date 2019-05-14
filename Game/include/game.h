@@ -12,12 +12,12 @@
  */
 typedef struct Game
 {
-    Car car;
+	Car car;
 	Road roads[5];
 	int numberOfPads;
 	int rotation;
-    int width;
-    int height;
+	int width;
+	int height;
 	int dir;
 	double dist;
 	int gameOver;

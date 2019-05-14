@@ -4,7 +4,7 @@
 void resize_game(Game* game, int width, int height)
 {
 	game->width = width;
-    game->height = height;
+	game->height = height;
 }
 
 void init(Game* game, int width, int height)
@@ -12,9 +12,9 @@ void init(Game* game, int width, int height)
 	game->gameOver = 0;
 	game->dir = 0;
 	game->rotation = 0;
-    game->width = width;
-    game->height = height;
-    game->dist = 0;
+	game->width = width;
+	game->height = height;
+	game->dist = 0;
 	game->numberOfPads = sizeof(game->roads)/sizeof(game->roads[0]);
 	game->drawhelp = 1;
 	
@@ -42,7 +42,7 @@ int in = 0;
 int belement = 0;
 void update_game(Game* game)
 {
-    update_car(&game->car);
+	update_car(&game->car);
 	
 	float car_x = game->car.x;
 	float car_y = game->car.y;

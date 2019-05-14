@@ -20,8 +20,8 @@ Model obstacleModel;
 typedef struct Road
 {
 	int size;
-    float x;
-    float y;
+	float x;
+	float y;
 	int rotation;
 	int dir;
 	int hasObstacle;

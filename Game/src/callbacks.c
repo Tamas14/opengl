@@ -3,42 +3,42 @@
 void display()
 {
 	glClearColor(.8, .8, .8, .5);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glMatrixMode(GL_MODELVIEW);
-    glPushMatrix();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	glPushMatrix();
 
 	set_view(&camera);
-    draw_game(&game);
+	draw_game(&game);
 
-    glPopMatrix();
-    glutSwapBuffers();
+	glPopMatrix();
+	glutSwapBuffers();
 }
 
 void reshape(GLsizei width, GLsizei height)
 {
-    resize_game(&game, width, height);
+	resize_game(&game, width, height);
 	
-    int x, y, w, h;
-    double ratio;
+	int x, y, w, h;
+	double ratio;
 
-    ratio = (double)width / height;
-    if (ratio > VIEWPORT_RATIO) {
-        w = (int)((double)height * VIEWPORT_RATIO);
-        h = height;
-        x = (width - w) / 2;
-        y = 0;
-    }
-    else {
-        w = width;
-        h = (int)((double)width / VIEWPORT_RATIO);
-        x = 0;
-        y = (height - h) / 2;
-    }
+	ratio = (double)width / height;
+	if (ratio > VIEWPORT_RATIO) {
+		w = (int)((double)height * VIEWPORT_RATIO);
+		h = height;
+		x = (width - w) / 2;
+		y = 0;
+	}
+	else {
+		w = width;
+		h = (int)((double)width / VIEWPORT_RATIO);
+		x = 0;
+		y = (height - h) / 2;
+	}
 
-    glViewport(x, y, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 20000.0);
+	glViewport(x, y, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(VIEWPORT_ASPECT, VIEWPORT_RATIO, 0.01, 20000.0);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -68,7 +68,7 @@ void keyboard(unsigned char key, int x, int y)
 			break;
 		}
 	}
-    glutPostRedisplay();
+	glutPostRedisplay();
 }
 
 void keyboard_up(unsigned char key, int x, int y)
@@ -81,13 +81,13 @@ void keyboard_up(unsigned char key, int x, int y)
 			game.car.turning = 0;
 		break;
 	}
-    glutPostRedisplay();
+	glutPostRedisplay();
 }
 
 void idle()
 {
-    update_game(&game);
+	update_game(&game);
 	update_camera(&camera, &game);
 	
-    glutPostRedisplay();
+	glutPostRedisplay();
 }

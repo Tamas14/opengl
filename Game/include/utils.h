@@ -19,9 +19,9 @@ typedef GLubyte Pixel[3];
  */
 typedef struct vec3
 {
-    float x;
-    float y;
-    float z;
+	float x;
+	float y;
+	float z;
 } vec3;
 
 /**
@@ -29,9 +29,9 @@ typedef struct vec3
  */
 typedef struct Color
 {
-    float red;
-    float green;
-    float blue;
+	float red;
+	float green;
+	float blue;
 } Color;
 
 /**
@@ -39,10 +39,10 @@ typedef struct Color
  */
 typedef struct Material
 {
-    struct Color ambient; 
-    struct Color diffuse; 
-    struct Color specular; 
-    float shininess;
+	struct Color ambient; 
+	struct Color diffuse; 
+	struct Color specular; 
+	float shininess;
 } Material;
 
 GLuint load_texture(char* filename);

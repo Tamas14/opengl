@@ -11,13 +11,13 @@ Model snailModel;
 
 typedef struct Car
 {
-    float x;
-    float y;
-    float dir;
-    float speed_x;
+	float x;
+	float y;
+	float dir;
+	float speed_x;
 	float vel_x;
 	int acceleration;
-    int turning;
+	int turning;
 } Car;
 
 /**

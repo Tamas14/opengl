@@ -9,20 +9,20 @@ double degree_to_radian(double degree)
 
 GLuint load_texture(char* filename)
 {
-    GLuint texture_name;
-    glGenTextures(1, &texture_name);
+	GLuint texture_name;
+	glGenTextures(1, &texture_name);
 
-    int width;
-    int height;
+	int width;
+	int height;
 
-    Pixel* image = (Pixel*)SOIL_load_image(filename, &width, &height, 0, SOIL_LOAD_RGB);
+	Pixel* image = (Pixel*)SOIL_load_image(filename, &width, &height, 0, SOIL_LOAD_RGB);
 
-    glBindTexture(GL_TEXTURE_2D, texture_name);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, (Pixel*)image);
+	glBindTexture(GL_TEXTURE_2D, texture_name);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, (Pixel*)image);
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	
+
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
@@ -35,15 +35,15 @@ void mult(int rowsA, int colsA, int rowsB, int colsB, double a[rowsA][colsA], do
 	double sum = 0.0;
 	
 	for (i = 0; i < rowsA; i++) {
-      for (j = 0; j < colsB; j++) {
-        for (k = 0; k < colsA; k++) {
-          sum = sum + a[i][k]*b[k][j];
-        }
+		for (j = 0; j < colsB; j++) {
+			for (k = 0; k < colsA; k++) {
+				sum = sum + a[i][k]*b[k][j];
+			}
 
-        c[i][j] = sum;
-        sum = 0;
-      }
-    }
+			c[i][j] = sum;
+			sum = 0;
+		}
+	}
 }
 
 void shift(Game* game)
@@ -116,21 +116,21 @@ void generate(Game* game, int i)
 }
 
 void Perspective() {
-    glPushMatrix();
+	glPushMatrix();
 			glMatrixMode(GL_PROJECTION);
 			glLoadIdentity();
 			gluPerspective(80, (double) VIEWPORT_RATIO, 0.01, 20000.0);
 			glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
+	glPopMatrix();
 }
 
 void Ortho(Game* game) {
-    glPushMatrix();
+	glPushMatrix();
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, game->width, 0, game->height, -100, 100);
 		glMatrixMode(GL_MODELVIEW);
-    glPopMatrix();
+	glPopMatrix();
 }
 
 int sumArray(int arr[], int len)
@@ -143,10 +143,10 @@ int sumArray(int arr[], int len)
 }
 
 void drawTextToScreen(Game* game, float x, float y, char* s) {
-    glDisable(GL_LIGHTING);
+	glDisable(GL_LIGHTING);
 	Ortho(game);
 	
-    glPushMatrix();
+	glPushMatrix();
 		glLoadIdentity();
 		glDisable(GL_DEPTH_TEST);
 		glRasterPos2f(x, y);
@@ -157,8 +157,8 @@ void drawTextToScreen(Game* game, float x, float y, char* s) {
 		}
 		
 		glEnable(GL_DEPTH_TEST);
-    glPopMatrix();
+	glPopMatrix();
 	
 	Perspective();
-    glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHTING);
 }

@@ -8,16 +8,16 @@
 void set_lighting()
 {
 	float ambient_light[] = { 	0.988f, 0.831f, 0.250f, 0.3f };
-    float diffuse_light[] = { 	1.0f, 1.0f, 1.0f, 0.5f };
-    float specular_light[] = { 	1.0f, 1.0f, 1.0f, 0.8f };
-    float position[] = { 0.0f, 0.0f, 10.0f, 1.0f };
+	float diffuse_light[] = { 	1.0f, 1.0f, 1.0f, 0.5f };
+	float specular_light[] = { 	1.0f, 1.0f, 1.0f, 0.8f };
+	float position[] = { 0.0f, 0.0f, 10.0f, 1.0f };
 
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
-    glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 160.0f);
-    glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0.0f);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
-    glLightfv(GL_LIGHT0, GL_POSITION, position);
+	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient_light);
+	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse_light);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 160.0f);
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 0.0f);
+	glLightfv(GL_LIGHT0, GL_SPECULAR, specular_light);
+	glLightfv(GL_LIGHT0, GL_POSITION, position);
 }
 
 char txtString[200];

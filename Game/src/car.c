@@ -24,6 +24,6 @@ void update_car(Car* car)
 		car->speed_x = 0;
 	
 	
-    car->x += car->speed_x/10 * cos(degree_to_radian(car->dir));
-    car->y += car->speed_x/10 * sin(degree_to_radian(car->dir));
+	car->x += car->speed_x/10 * cos(degree_to_radian(car->dir));
+	car->y += car->speed_x/10 * sin(degree_to_radian(car->dir));
 }

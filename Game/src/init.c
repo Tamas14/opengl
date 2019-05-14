@@ -9,15 +9,15 @@
 void init_opengl()
 {
 	char texture_filenames[][32] = {
-        "textures/turnleft.png",
-        "textures/forward.png",
-        "textures/turnright.png",
-        "textures/obstacle.png",
-        "textures/snail.png",
-        "textures/plain.png",
-        "textures/gameover.png",
-        "textures/forwardwhelp.png"
-    };
+		"textures/turnleft.png",
+		"textures/forward.png",
+		"textures/turnright.png",
+		"textures/obstacle.png",
+		"textures/snail.png",
+		"textures/plain.png",
+		"textures/gameover.png",
+		"textures/forwardwhelp.png"
+	};
 	
 	load_model(&roadModel, "models/road.obj");
 	load_model(&snailModel, "models/snail.obj");
@@ -29,19 +29,19 @@ void init_opengl()
 		textures[i] = load_texture(texture_filenames[i]);
 	}
 	
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
-    glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);
 
-    glClearDepth(1.0);
+	glClearDepth(1.0);
 
-    glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);
 
-    glEnable(GL_LIGHTING);
-    glEnable(GL_COLOR_MATERIAL);
-    glEnable(GL_LIGHT0);
-    glEnable(GL_FOG);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHT0);
+	glEnable(GL_FOG);
 	glShadeModel(GL_SMOOTH);
 	
 	float fog_light[] = {0.6f, 0.6f, 0.6f, 0.1f};
