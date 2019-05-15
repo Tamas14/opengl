@@ -1,15 +1,15 @@
 #include "car.h"
 #include "utils.h"
 
-void update_car(Car* car)
+void update_car(Car* car, int maxSpeed)
 {
 	car->dir -= car->turning*3;
-	
+
 	if(car->acceleration == 1)
 	{
 		car->vel_x += 0.05;
 		
-		if(car->speed_x+car->vel_x > 50)
+		if(car->speed_x+car->vel_x > maxSpeed)
 			car->vel_x = 0;
 	}else if(car->acceleration == 2)
 	{

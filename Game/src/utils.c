@@ -25,6 +25,8 @@ GLuint load_texture(char* filename)
 
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
     return texture_name;
 }
@@ -158,7 +160,7 @@ void drawTextToScreen(Game* game, float x, float y, char* s) {
 		
 		glEnable(GL_DEPTH_TEST);
 	glPopMatrix();
-	
+
 	Perspective();
 	glEnable(GL_LIGHTING);
 }

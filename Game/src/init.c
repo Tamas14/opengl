@@ -37,12 +37,14 @@ void init_opengl()
 	glClearDepth(1.0);
 
 	glEnable(GL_TEXTURE_2D);
-
+	glShadeModel(GL_SMOOTH);
+	glEnable(GL_NORMALIZE);
+    glEnable(GL_AUTO_NORMAL);
+	
 	glEnable(GL_LIGHTING);
 	glEnable(GL_COLOR_MATERIAL);
 	glEnable(GL_LIGHT0);
 	glEnable(GL_FOG);
-	glShadeModel(GL_SMOOTH);
 	
 	float fog_light[] = {0.6f, 0.6f, 0.6f, 0.1f};
 	
@@ -51,6 +53,8 @@ void init_opengl()
 	glFogf(GL_FOG_START, 0.0f);
 	glFogf(GL_FOG_END, 400.0f);
 	glFogfv(GL_FOG_COLOR, fog_light);
+	
+	glHint(GL_FOG_HINT, GL_NICEST);
 	
 	init_camera(&camera);
 }

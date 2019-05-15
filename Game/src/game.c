@@ -17,6 +17,7 @@ void init(Game* game, int width, int height)
 	game->dist = 0;
 	game->numberOfPads = sizeof(game->roads)/sizeof(game->roads[0]);
 	game->drawhelp = 1;
+	game->maxSpeed = 40;
 	
 	game->car.x = 0;
 	game->car.y = 0;
@@ -41,7 +42,7 @@ void init(Game* game, int width, int height)
 int in = 0;
 void update_game(Game* game)
 {
-	update_car(&game->car);
+	update_car(&game->car, game->maxSpeed);
 	
 	float car_x = game->car.x;
 	float car_y = game->car.y;
@@ -86,4 +87,14 @@ void update_game(Game* game)
 		game->gameOver = 1;
 		game->car.acceleration = 2;
 	}
+	
+	double step = 4.0;
+	if(round(game->dist) > 10.0)
+		step++;
+	if(round(game->dist) > 40.0)
+		step++;
+	if(round(game->dist) > 100.0)
+		step+= 0.5;
+	
+	game->maxSpeed = step*10;
 }

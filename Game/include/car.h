@@ -23,6 +23,6 @@ typedef struct Car
 /**
  * Moving the car
  */
-void update_car(Car* car);
+void update_car(Car* car, int maxSpeed);
 
 #endif

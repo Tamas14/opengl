@@ -22,6 +22,7 @@ typedef struct Game
 	double dist;
 	int gameOver;
 	int drawhelp;
+	int maxSpeed;
 } Game;
 
 /**
