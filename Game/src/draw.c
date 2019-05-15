@@ -34,7 +34,6 @@ void set_lighting()
 char txtString[200];
 void draw_game(Game* game)
 {	
-	GLfloat no_mat[] = { 0.0, 0.0, 0.0, 1.0 };
 	GLfloat mat_ambient[] = { 0.7, 0.7, 0.7, 0.3 };
 	GLfloat mat_diffuse[] = { 1, 1, 1, 1.0 };
 	GLfloat mat_specular[] = { 1.0, 0.6, 0.6, 1.0 };
